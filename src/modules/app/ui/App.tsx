@@ -1,10 +1,7 @@
-import { ChatWidget } from "@/modules/widgetes"
+import { ChatWidget } from '@/modules/widgetes';
 
 function App() {
-
-  return (
-    <ChatWidget />
-  )
+    return <ChatWidget />;
 }
 
-export default App
+export default App;

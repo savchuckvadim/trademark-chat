@@ -1,37 +1,23 @@
 {
-  "files": [],
-  "references": [
-    {
-      "path": "./tsconfig.app.json"
-    },
-    {
-      "path": "./tsconfig.node.json"
+    "files": [],
+    "references": [
+        {
+            "path": "./tsconfig.app.json"
+        },
+        {
+            "path": "./tsconfig.node.json"
+        }
+    ],
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+            "@/*": ["./src/*"],
+            "@components": ["./src/modules/shared/components"],
+            "@components/*": ["./src/modules/shared/components/*"],
+            "@lib": ["./src/modules/shared/lib"],
+            "@lib/*": ["./src/modules/shared/lib/*"],
+            "@hooks": ["./src/modules/shared/hooks"],
+            "@hooks/*": ["./src/modules/shared/hooks/*"]
+        }
     }
-  ],
-  "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "@/*": [
-        "./src/*"
-      ],
-      "@components": [
-        "./src/modules/shared/components"
-      ],
-      "@components/*": [
-        "./src/modules/shared/components/*"
-      ],
-      "@lib": [
-        "./src/modules/shared/lib"
-      ],
-      "@lib/*": [
-        "./src/modules/shared/lib/*"
-      ],
-      "@hooks": [
-        "./src/modules/shared/hooks"
-      ],
-      "@hooks/*": [
-        "./src/modules/shared/hooks/*"
-      ]
-    }
-  }
 }

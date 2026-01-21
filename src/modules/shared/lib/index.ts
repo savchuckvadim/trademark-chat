@@ -1,1 +1,1 @@
-export * from "./utils/cn.util"
+export * from './utils/cn.util';
