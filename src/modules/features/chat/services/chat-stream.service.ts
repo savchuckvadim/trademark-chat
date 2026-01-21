@@ -5,7 +5,7 @@ export interface IChatStreamServiceConfig {
     targetWordsCount?: number
     interval: number
     onChunk: (chunk: string) => void
-    onStart: () => void
+    // onStart: () => void
     onStop: () => void
     onComplete: () => void
 }

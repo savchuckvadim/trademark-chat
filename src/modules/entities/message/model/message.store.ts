@@ -1,10 +1,10 @@
 import { create } from 'zustand';
-import type { IMessage } from '../tpyes/message.type';
+import type { IMessage, IMessageAdd } from '../tpyes/message.type';
 
 interface MessageState {
     messages: IMessage[];
     isLoading: boolean;
-    addMessage: (message: Omit<IMessage, 'id' | 'timestamp'>) => Promise<void>;
+    addMessage: (message: IMessageAdd) => void;
     updateMessage: (id: string, content: string) => void;
     setMessageStreaming: (id: string, isStreaming: boolean) => void;
     clearMessages: () => void;
@@ -13,8 +13,7 @@ interface MessageState {
 export const useMessageStore = create<MessageState>(set => ({
     isLoading: false,
     messages: [],
-    async addMessage(message) {
-        set({ isLoading: true })
+    addMessage(message) {
 
         set(state => ({
             messages: [
@@ -26,16 +25,17 @@ export const useMessageStore = create<MessageState>(set => ({
                 },
             ],
         }))
-        await new Promise(resolve => setTimeout(resolve, 1000))
-        set({ isLoading: false })
+
     },
-    setIsLoading: (isLoading: boolean) => set({ isLoading }),
-    updateMessage: (id, content) =>
+
+    updateMessage: (id, chunk) =>
         set(state => ({
             messages: state.messages.map(msg =>
-                msg.id === id ? { ...msg, content } : msg,
+                msg.id === id ? { ...msg, chunks: [...msg.chunks, chunk] } : msg,
             ),
         })),
+
+
     setMessageStreaming: (id, isStreaming) =>
         set(state => ({
             messages: state.messages.map(msg =>
@@ -43,6 +43,8 @@ export const useMessageStore = create<MessageState>(set => ({
                     ? {
                         ...msg,
                         isDone: !isStreaming,
+                        chunks: isStreaming ? [...msg.chunks, ''] : [],
+                        content: !isStreaming ? msg.chunks.join('') : '',
                     }
                     : msg,
             ),

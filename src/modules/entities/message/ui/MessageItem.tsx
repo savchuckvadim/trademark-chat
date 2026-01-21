@@ -27,7 +27,11 @@ export const MessageItem = memo(
                 >
                     <div className="text-sm whitespace-pre-wrap break-words prose prose-sm max-w-none dark:prose-invert" />
                     {!message.isDone && message.chunks.length > 0 && (
-                        <span className="inline-block w-2 h-4 ml-1 bg-current animate-pulse" />
+                        <span className="inline-block w-2 h-4 ml-1 bg-current animate-pulse">
+                            {message.chunks.map((chunk, index) => (
+                                <span key={index}>{chunk}</span>
+                            ))}
+                        </span>
                     )}
                     {message.isDone && message.content && (
                         <div className="text-sm whitespace-pre-wrap break-words prose prose-sm max-w-none dark:prose-invert">

@@ -8,3 +8,5 @@ export interface IMessage {
     isDone: boolean;
     chunks: string[];
 }
+
+export interface IMessageAdd extends Omit<IMessage, "id" | "timestamp"> {}
