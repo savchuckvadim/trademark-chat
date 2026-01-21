@@ -3,17 +3,20 @@ import type { IMessage } from '../tpyes/message.type';
 
 interface MessageState {
     messages: IMessage[];
-    addMessage: (message: Omit<IMessage, 'id' | 'timestamp'>) => void;
+    isLoading: boolean;
+    addMessage: (message: Omit<IMessage, 'id' | 'timestamp'>) => Promise<void>;
     updateMessage: (id: string, content: string) => void;
     setMessageStreaming: (id: string, isStreaming: boolean) => void;
     clearMessages: () => void;
 }
 
 export const useMessageStore = create<MessageState>(set => ({
+    isLoading: false,
     messages: [],
-    addMessage: message => {
-        console.log('addMessage', message);
-        return set(state => ({
+    async addMessage(message) {
+        set({ isLoading: true })
+
+        set(state => ({
             messages: [
                 ...state.messages,
                 {
@@ -22,8 +25,11 @@ export const useMessageStore = create<MessageState>(set => ({
                     timestamp: Date.now(),
                 },
             ],
-        }));
+        }))
+        await new Promise(resolve => setTimeout(resolve, 1000))
+        set({ isLoading: false })
     },
+    setIsLoading: (isLoading: boolean) => set({ isLoading }),
     updateMessage: (id, content) =>
         set(state => ({
             messages: state.messages.map(msg =>
@@ -35,9 +41,9 @@ export const useMessageStore = create<MessageState>(set => ({
             messages: state.messages.map(msg =>
                 msg.id === id
                     ? {
-                          ...msg,
-                          isStreaming,
-                      }
+                        ...msg,
+                        isDone: !isStreaming,
+                    }
                     : msg,
             ),
         })),
