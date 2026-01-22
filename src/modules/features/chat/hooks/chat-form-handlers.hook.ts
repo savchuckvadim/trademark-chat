@@ -1,5 +1,5 @@
-import { useCallback } from "react";
-import { useStreaming } from "./streaming.hook";
+import { useCallback } from 'react';
+import { useStreaming } from './streaming.hook';
 
 export const useChatFormHandlers = () => {
     const { isGenerating, startStreaming, stopStreaming } = useStreaming();

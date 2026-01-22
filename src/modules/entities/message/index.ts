@@ -3,5 +3,4 @@ export * from './tpyes/message.type';
 
 export * from './ui/MessageList';
 
-
-export type { IMessage, IMessageAdd } from './tpyes/message.type';  
+export type { IMessage, IMessageAdd } from './tpyes/message.type';

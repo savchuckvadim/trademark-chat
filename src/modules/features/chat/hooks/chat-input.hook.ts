@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 export const useChatInput = () => {
     const [input, setInput] = useState('');
@@ -7,5 +7,5 @@ export const useChatInput = () => {
         input,
         // setInput из useState уже стабилен, не нужно оборачивать в useCallback
         setInput,
-    }
-}
+    };
+};

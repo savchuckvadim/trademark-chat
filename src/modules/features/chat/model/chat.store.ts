@@ -1,19 +1,14 @@
-import { create } from 'zustand'
-
+import { create } from 'zustand';
 
 export interface ChatState {
-    isGenerating: boolean
-
+    isGenerating: boolean;
 }
-
 
 interface ChatStore extends ChatState {
-    setIsGenerating: (isGenerating: boolean) => void
-
+    setIsGenerating: (isGenerating: boolean) => void;
 }
 
-export const useChatStore = create<ChatStore>((set) => ({
+export const useChatStore = create<ChatStore>(set => ({
     isGenerating: false,
-    setIsGenerating: (isGenerating) => set({ isGenerating }),
-
-}))
+    setIsGenerating: isGenerating => set({ isGenerating }),
+}));
